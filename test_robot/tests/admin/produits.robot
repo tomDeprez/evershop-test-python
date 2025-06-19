@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    ../config.robot
-Test Setup  Open Browser  http://localhost:3000/  chrome  #headlesschrome
+Resource    ../../config.robot
+Test Setup  Open Browser  http://192.168.246.145:3000/  chrome  #headlesschrome
 Test Teardown  Close Browser
 
 
@@ -23,11 +23,13 @@ creer un produit simple
     Input Text    name=qty           100
     # Ajouter les attributs couleur et taille si présents dans le DOM
     Click Button    css=.button.primary
+    Wait Until Page Contains   Editing Smartphone X
+
 
 supprimer mon produit
     login et creer un produit
     Click Element    xpath=//a[contains(., 'Products')] 
-    Wait Until Element Is Visible    xpath=//table[contains(@class, 'listing')]//tbody/tr[2]//input[@type='checkbox']
-    Click Element    xpath=//table[contains(@class, 'listing')]//tbody/tr[2]//input[@type='checkbox']
-    Wait Until Element Is Visible    xpath=//a[span[normalize-space(text())="Delete"]]
-    Click Element    xpath=//a[span[normalize-space(text())="Delete"]]
+    Click Element    css=tr:nth-of-type(2) .checkbox-unchecked
+    Click Element    css=.border-l:nth-of-type(4)
+    Wait Until Element Is Enabled    css=.critical      5
+    Click Element    css=.critical
